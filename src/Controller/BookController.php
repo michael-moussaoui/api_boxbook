@@ -32,13 +32,12 @@ class BookController extends AbstractController
     {
         $booksRepository = $entityManager->getRepository(Book::class);
         $books = $booksRepository->findBy(['id' => $id]);
-        dd($books);
         $json = $serializer->serialize($books,'json');
 
         $response = new Response($json, 200, [
             "Content-Type" =>"application/json"
         ]);
-        dd($response);
+       
         
         return $response;
     }
