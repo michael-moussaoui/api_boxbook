@@ -17,7 +17,7 @@ class BoxBookController extends AbstractController
         ]);
     }
     #[Route('api/v1/boxbook/{id}', name: 'app_box_book', methods: ['GET'])]
-    public function getBoxBook(): JsonResponse
+    public function getBoxBookById(): JsonResponse
     {
         return $this->json([
             'message' => 'Welcome to your new controller!',
