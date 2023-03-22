@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\BoxBookRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -28,6 +30,14 @@ class BoxBook
 
     #[ORM\Column(type: Types::ARRAY, nullable: true)]
     private array $geoloc = [];
+
+    #[ORM\OneToMany(mappedBy: 'boxbookId', targetEntity: Book::class)]
+    private Collection $books;
+
+    public function __construct()
+    {
+        $this->books = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -90,6 +100,36 @@ class BoxBook
     public function setGeoloc(?array $geoloc): self
     {
         $this->geoloc = $geoloc;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Book>
+     */
+    public function getBooks(): Collection
+    {
+        return $this->books;
+    }
+
+    public function addBook(Book $book): self
+    {
+        if (!$this->books->contains($book)) {
+            $this->books->add($book);
+            $book->setBoxbookId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBook(Book $book): self
+    {
+        if ($this->books->removeElement($book)) {
+            // set the owning side to null (unless already changed)
+            if ($book->getBoxbookId() === $this) {
+                $book->setBoxbookId(null);
+            }
+        }
 
         return $this;
     }
