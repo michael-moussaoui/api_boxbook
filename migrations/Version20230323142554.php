@@ -20,19 +20,19 @@ final class Version20230323142554 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE book DROP FOREIGN KEY FK_CBE5A331D4C006C8');
-        $this->addSql('ALTER TABLE book DROP FOREIGN KEY FK_CBE5A33141391494');
-        $this->addSql('DROP INDEX IDX_CBE5A331D4C006C8 ON book');
-        $this->addSql('DROP INDEX IDX_CBE5A33141391494 ON book');
-        $this->addSql('ALTER TABLE book ADD boxbook_id_id INT DEFAULT NULL, DROP boxbook_id, DROP borrow_id');
-        $this->addSql('ALTER TABLE book ADD CONSTRAINT FK_CBE5A331EDF08A00 FOREIGN KEY (boxbook_id_id) REFERENCES box_book (id)');
-        $this->addSql('CREATE INDEX IDX_CBE5A331EDF08A00 ON book (boxbook_id_id)');
+        // $this->addSql('ALTER TABLE book DROP FOREIGN KEY FK_CBE5A331D4C006C8');
+        // $this->addSql('ALTER TABLE book DROP FOREIGN KEY FK_CBE5A33141391494');
+        // $this->addSql('DROP INDEX IDX_CBE5A331D4C006C8 ON book');
+        // $this->addSql('DROP INDEX IDX_CBE5A33141391494 ON book');
+        // $this->addSql('ALTER TABLE book ADD boxbook_id_id INT DEFAULT NULL, DROP boxbook_id, DROP borrow_id');
+        // $this->addSql('ALTER TABLE book ADD CONSTRAINT FK_CBE5A331EDF08A00 FOREIGN KEY (boxbook_id_id) REFERENCES box_book (id)');
+        // $this->addSql('CREATE INDEX IDX_CBE5A331EDF08A00 ON book (boxbook_id_id)');
         // $this->addSql('ALTER TABLE borrow DROP FOREIGN KEY FK_55DBA8B0A76ED395');
         // $this->addSql('DROP INDEX IDX_55DBA8B0A76ED395 ON borrow');
         // $this->addSql('ALTER TABLE borrow DROP user_id');
-        $this->addSql('DROP INDEX `primary` ON user');
-        $this->addSql('ALTER TABLE user CHANGE id id INT AUTO_INCREMENT NOT NULL, CHANGE uuid uuid VARCHAR(180) NOT NULL');
-        $this->addSql('ALTER TABLE user ADD PRIMARY KEY (id)');
+        // $this->addSql('DROP INDEX `primary` ON user');
+        // $this->addSql('ALTER TABLE user CHANGE id id INT AUTO_INCREMENT NOT NULL, CHANGE uuid uuid VARCHAR(180) NOT NULL');
+        // $this->addSql('ALTER TABLE user ADD PRIMARY KEY (id)');
     }
 
     public function down(Schema $schema): void

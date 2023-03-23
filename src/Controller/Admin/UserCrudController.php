@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
+use Symfony\Component\Uid\Uuid;
 use Symfony\Component\Form\FormEvents;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -11,6 +12,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Config\KeyValueStore;
 use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
@@ -33,14 +35,21 @@ class UserCrudController extends AbstractCrudController
         return User::class;
     }
 
+    public function createEntity(string $entityFqcn)
+    {
+        $user = new User();
+        $user->setUuid(Uuid::v4()); // Générer un UUID aléatoire
+        return $user;
+    }
+
     
     public function configureFields(string $pageName): iterable
     {
         $fields = [
-          IdField::new('uuid'),
+          TextField::new('uuid')->hideOnForm(),
           IdField::new('id')->hideOnForm(),
           TextField::new('name'),
-          TexTField::new('email'),
+          TextField::new('email'),
           CollectionField::new('roles'),
           TextField::new('password'),
           ImageField::new('avatar')
